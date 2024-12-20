@@ -4,14 +4,12 @@ document.getElementById('qr-form').addEventListener('submit', function (e) {
     const id = document.getElementById('qr-id').value;
     const data = { id };
 
-    if (!id.startsWith('https://')||!id.startsWith('http://')) {
-        alert('Error: The URL must start with "http(s)://".');
+    if (!id.startsWith('https://')) {
+        alert('Error: The URL must start with "https://".');
         return; 
     }
-    
-    const baseURL = window.location.origin;
 
-    fetch('${baseURL}/generate-qr', {
+    fetch('http://localhost:3000/generate-qr', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -41,7 +39,7 @@ document.getElementById('qr-form').addEventListener('submit', function (e) {
 
 
 document.getElementById('about-button').addEventListener('click', function () {
-    fetch('${baseURL}/about')
+    fetch('http://localhost:3000/about')
         .then(response => response.text())
         .then(aboutInfo => {
             const aboutResultDiv = document.getElementById('about-result');
